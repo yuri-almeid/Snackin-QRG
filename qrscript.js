@@ -1,7 +1,14 @@
 // Coleta informações
 let input_cod = document.querySelector('#cod');
+let input_name = document.querySelector('#name');
+let input_code = document.querySelector('#code');
+let input_num = document.querySelector('#num');
 let input_ip = document.querySelector('#ip');
+let type = document.querySelector('#tipo');
 let button = document.querySelector('button');
+
+let ip;
+let cod;
 
 // Função que cria o QR-Code
 var qrcode = new QRCode(document.querySelector('#qrcode'), {
@@ -26,18 +33,42 @@ function code64(json_code) {
   // console.log(deBase64) 
 }
 
+
+// seleciona tipo
+type.addEventListener('change', ()=>{
+  
+  // Define ip do tipo específico
+  if (type.value == "FR") {
+
+    ip = "10.0.0.124";
+
+  } else if (type.value == "MM"){
+
+    ip = "10.0.0.125";
+
+  } else {
+    ip = "Selecione uma opção"
+  }
+
+  input_ip.value = ip;
+
+})
+
+
 // Botão gerar
 button.addEventListener('click', ()=>{
 
-  // Caso ip vazio deixa o IP padrão
-  if (input_ip.value == "") {
-    ip_ = "http://10.0.123.4"
-  } else {
-    ip_ = input_ip.value;
-  }
+  // Pega ip selecionado ou escrito
+  ip_ = "http://" + input_ip.value;
+
+
+  cod = "SNC00" + type.value + input_name.value.substr(0, 2).toUpperCase() + input_name.value.substr(-2).toUpperCase(); 
+  cod = cod + "00" + input_num.value;
+
+  input_code.value = cod;
 
   // Cria json dos códigos
-  let json = {codigo: input_cod.value, ip: ip_}
+  let json = {codigo: cod, ip: ip_}
   // Transforma o json em strin
   var json_str = JSON.stringify(json);
 

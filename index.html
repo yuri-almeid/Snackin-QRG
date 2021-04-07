@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,4 +21,40 @@
   <script src="qrcode.js"></script>
   <script src="qrscript.js"></script>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Snackin QRG</title>
+</head>
+<body>
+
+  <div class="container">
+    <p>Insira o nome do Condominio:</p>
+    <input id="name" type="Text" placeholder="Insira o nome">
+    <p>Insira o número do Condominio:</p>
+    <input id="num" type="Text" placeholder="Insira o número do portal">
+    <p>Selecione o Tipo de Acesso:</p>
+    <select name="tipo" id="tipo" >
+      <option value="null">Selecione</option>
+	    <option value="FR">Freezer</option>
+	    <option value="MM">Micro Market</option>
+	  </select>
+
+    <p>Insira o IP do Raspberry Pi:</p>
+    <input id="ip" type="Text" placeholder="Selecione o tipo de acesso.">
+    <button>Gerar</button>
+    <p>Código:</p>
+    <input id="code" type="Text" placeholder="Gere o código no botão acima." >
+    <p>QR-Code:</p>
+    <div id="qrcode"></div>
+  </div>
+
+  <script src="qrcode.js"></script>
+  <script src="qrscript.js"></script>
+</body>
+>>>>>>> Stashed changes
 </html>
