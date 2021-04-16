@@ -5,7 +5,10 @@ let input_code = document.querySelector('#code');
 let input_num = document.querySelector('#num');
 let input_ip = document.querySelector('#ip');
 let type = document.querySelector('#tipo');
-let button = document.querySelector('button');
+// let button = document.querySelector('button');
+let btn_code = document.querySelector('#gcode');
+let btn_qr = document.querySelector('#gqr');
+
 
 let ip;
 let cod;
@@ -55,20 +58,27 @@ type.addEventListener('change', ()=>{
 })
 
 
-// Botão gerar
-button.addEventListener('click', ()=>{
+
+// Botão gerar code 
+btn_code.addEventListener('click', ()=>{
+
+  
+  cod = "SN" + input_name.value.substr(0, 2).toUpperCase() + input_name.value.substr(-1).toUpperCase(); 
+  cod = cod  + "00" + type.value + "00" + input_num.value;
+
+  input_code.value = cod;
+
+})
+
+
+// Botão gerar qr
+btn_qr.addEventListener('click', ()=>{
 
   // Pega ip selecionado ou escrito
   ip_ = "http://" + input_ip.value;
 
-
-  cod = "SNC00" + type.value + input_name.value.substr(0, 2).toUpperCase() + input_name.value.substr(-2).toUpperCase(); 
-  cod = cod + "00" + input_num.value;
-
-  input_code.value = cod;
-
   // Cria json dos códigos
-  let json = {codigo: cod, ip: ip_}
+  let json = {codigo: input_code.value, ip: ip_}
   // Transforma o json em strin
   var json_str = JSON.stringify(json);
 
@@ -76,4 +86,34 @@ button.addEventListener('click', ()=>{
   
   let outputValue = code64(json_str);
   qrcode.makeCode(outputValue);
+
 })
+
+
+  
+
+
+
+
+// Botão gerar
+// button.addEventListener('click', ()=>{
+
+//   // Pega ip selecionado ou escrito
+//   ip_ = "http://" + input_ip.value;
+
+
+//   cod = "SNC00" + type.value + input_name.value.substr(0, 2).toUpperCase() + input_name.value.substr(-2).toUpperCase(); 
+//   cod = cod + "00" + input_num.value;
+
+//   input_code.value = cod;
+
+//   // Cria json dos códigos
+//   let json = {codigo: cod, ip: ip_}
+//   // Transforma o json em strin
+//   var json_str = JSON.stringify(json);
+
+//   console.log(json_str);
+  
+//   let outputValue = code64(json_str);
+//   qrcode.makeCode(outputValue);
+// })
