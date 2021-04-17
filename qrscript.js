@@ -62,30 +62,40 @@ type.addEventListener('change', ()=>{
 // Botão gerar code 
 btn_code.addEventListener('click', ()=>{
 
+  if(input_name.value.length > 0 && input_num.value.length > 0 && type.value != "null"){
+    cod = "SN" + input_name.value.substr(0, 2).toUpperCase() + input_name.value.substr(-1).toUpperCase(); 
+    cod = cod  + "00" + type.value + "00" + input_num.value;
   
-  cod = "SN" + input_name.value.substr(0, 2).toUpperCase() + input_name.value.substr(-1).toUpperCase(); 
-  cod = cod  + "00" + type.value + "00" + input_num.value;
-
-  input_code.value = cod;
-
+    input_code.value = cod;
+  }
+  else{
+    alert("Preencha todos os campos acima para prosseguir!");
+  }
+  
 })
 
 
 // Botão gerar qr
 btn_qr.addEventListener('click', ()=>{
 
-  // Pega ip selecionado ou escrito
-  ip_ = "http://" + input_ip.value;
+  if(input_ip.value.length == 0 || input_ip.value == "Selecione uma opção")
+  {
+    alert("Gere ou preencha o código manualmente para prosseguir");
+  }
+  else{
+    // Pega ip selecionado ou escrito
+    ip_ = "http://" + input_ip.value;
 
-  // Cria json dos códigos
-  let json = {codigo: input_code.value, ip: ip_}
-  // Transforma o json em strin
-  var json_str = JSON.stringify(json);
+    // Cria json dos códigos
+    let json = {codigo: input_code.value, ip: ip_}
+    // Transforma o json em strin
+    var json_str = JSON.stringify(json);
 
-  console.log(json_str);
-  
-  let outputValue = code64(json_str);
-  qrcode.makeCode(outputValue);
+    console.log(json_str);
+    
+    let outputValue = code64(json_str);
+    qrcode.makeCode(outputValue);
+  } 
 
 })
 
